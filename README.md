@@ -1,7 +1,9 @@
-## The main.py runs the scripts in the DataProcessor.py file importing the class DataProcessor from the DataProcessor.py file this is done by executing a method called process_dataframe() from the DataProcessor class.
-## process_dataframe has the flow of execution.
-## Here is a sequence:
+This is a take home task for hello fresh technical round, the project reads files consisting of delivery data and then updates the ice pack required for the orders using external APIs
 
+The main.py runs the scripts in the DataProcessor.py file importing the class DataProcessor from the DataProcessor.py file this is done by executing a method called process_dataframe() from the DataProcessor class.
+process_dataframe has the flow of execution.
+
+Here is a sequence:
 1. The files are loaded when the class is initialized along with the API keys.
 2. process_dataframe method is called
 3. The column 'EXPECTED_DELIVERY_DAYS' is transformed into the proper date time format for future use
