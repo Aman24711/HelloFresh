@@ -3,5 +3,5 @@
 *.csv
 *.parquet
 .env
-__pycache__/DataProcessor.cpython-313.pyc
+*.pyc
 Tests/__pycache__/data_processors_tests.cpython-313.pyc

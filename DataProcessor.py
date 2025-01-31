@@ -190,7 +190,7 @@ class DataProcessor:
             
             if datapack_with_ice_packs.at[index, 'COOL_POUCH_SIZE'] in ('S','M','L'):
                 datapack_with_ice_packs.at[index, 'NUMBER_OF_ICE_PACKS'] = self.get_ice_packs(row) + transit_packs
-            elif datapack_with_ice_packs.at[index, 'COOL_POUCH_SIZE'] in ('S','M','L') == 'XL':
+            elif datapack_with_ice_packs.at[index, 'COOL_POUCH_SIZE'] == 'XL':
                 datapack_with_ice_packs.at[index, 'NUMBER_OF_ICE_PACKS'] = self.get_ice_packs_XL(row) + transit_packs
 
         return datapack_with_ice_packs 
