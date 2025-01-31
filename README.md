@@ -22,3 +22,7 @@ Here is a sequence:
 7. fill_dataframe_with_station_code_and_temperature updates the station_code using the latitude and longitude from meteostat api then the average_temperature is updated using the station_code via meteostat API.
 9. fill_dataframe_temperature_nan uses the temperature from the nearest available location on the given day to update the areas for which the station code gave no response to the api request.
 10. Once this is done allocate_ice_packs_to_orders method updates the Ice pack required column using the temperature interval table and transit days.
+
+
+### Additional Information:
+The data exploration and developing the code was done on Jupyter Notebook. The API calls were tested and the data was requested from various APIs to update the Ice pack data. There was an issue while using the meteostate API where the API requests had to be made mutiple times. For any errors None is returned.
