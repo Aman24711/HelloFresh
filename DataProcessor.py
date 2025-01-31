@@ -13,6 +13,17 @@ class DataProcessor:
         self.df_csv = pd.read_csv(csv_path)
         self.df_parquet = pd.read_parquet(parquet_path, engine="pyarrow")
 
+
+    def process_dataframe(self, output_file_path = 'ice_pack_requirement_for_orders.parquet'):
+        self.df_parquet['EXPECTED_DELIVERY_DATE'] = pd.to_datetime(self.df_parquet['EXPECTED_DELIVERY_DATE']).dt.strftime('%Y-%m-%d')
+        self.df_parquet["OUTCODE"] = self.df_parquet["POSTCODE"].str[:-3]
+        self.df_parquet[['LATITUDE', 'LONGITUDE']] = self.df_parquet['OUTCODE'].apply(lambda x: pd.Series(self.get_coordinates(x)))
+        self.df_parquet = self.insert_latlong(self.df_parquet)
+        self.df_parquet = self.fill_dataframe_with_station_code_and_temperature(self.df_parquet)
+        self.df_parquet = self.fill_dataframe_temperature_nan(self.df_parquet)
+        self.df_parquet = self.allocate_ice_packs_to_orders(self.df_parquet)
+        self.df_parquet.to_parquet(output_file_path)
+
     def get_outcode(self, postcode):
         if len(postcode) < 5:
             raise ValueError
@@ -184,12 +195,3 @@ class DataProcessor:
 
         return datapack_with_ice_packs 
     
-    def process_dataframe(self, output_file_path = 'ice_pack_requirement_for_orders.parquet'):
-        self.df_parquet['EXPECTED_DELIVERY_DATE'] = pd.to_datetime(self.df_parquet['EXPECTED_DELIVERY_DATE']).dt.strftime('%Y-%m-%d')
-        self.df_parquet["OUTCODE"] = self.df_parquet["POSTCODE"].str[:-3]
-        self.df_parquet[['LATITUDE', 'LONGITUDE']] = self.df_parquet['OUTCODE'].apply(lambda x: pd.Series(self.get_coordinates(x)))
-        self.df_parquet = self.insert_latlong(self.df_parquet)
-        self.df_parquet = self.fill_dataframe_with_station_code_and_temperature(self.df_parquet)
-        self.df_parquet = self.fill_dataframe_temperature_nan(self.df_parquet)
-        self.df_parquet = self.allocate_ice_packs_to_orders(self.df_parquet)
-        self.df_parquet.to_parquet(output_file_path)
