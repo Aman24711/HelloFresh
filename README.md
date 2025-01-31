@@ -1,4 +1,13 @@
-This is a take home task for hello fresh technical round, the project reads files consisting of delivery data and then updates the ice pack required for the orders using external APIs
+### This is a take home task for hello fresh technical round, the project reads files consisting of delivery data and then updates the ice pack required for the orders using external APIs
+
+### How to run the files:
+1. Pull the repo
+2. Make a virtual environment python -m venv env
+3. Activate the virtual environment env\Scripts\activate
+4. pip install -r requirements.txt
+5. Run the application using the following command python main.py
+6. Optionally run the docker file docker build -t processor:v1
+7. Docker run docker run processor:v1
 
 The main.py runs the scripts in the DataProcessor.py file importing the class DataProcessor from the DataProcessor.py file this is done by executing a method called process_dataframe() from the DataProcessor class.
 process_dataframe has the flow of execution.
